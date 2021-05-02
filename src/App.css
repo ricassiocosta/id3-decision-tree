@@ -1,0 +1,44 @@
+div.custom-container {
+  background-color: #242424;
+  width: 100vw;
+}
+
+svg {
+  overflow: overlay;
+}
+
+svg.custom .node circle {
+  fill: #f3f3ff;
+  stroke: #2593b8;
+  stroke-width: 1.5px;
+}
+
+svg.custom .node text {
+  font-size: 14px;
+  fill: #242424;
+  font-weight: bold;
+}
+
+svg.custom .edge text {
+  font-size: 14px;
+  fill: #242424;
+  font-style: italic;
+}
+
+svg.custom .node {
+  cursor: pointer;
+}
+
+svg.custom path.link {
+  fill: none;
+  stroke: #2593b8;
+  stroke-width: 1.5px;
+}
+
+.edge circle {
+  display: none;
+}
+
+text {
+  transform: rotate(-90deg);
+}

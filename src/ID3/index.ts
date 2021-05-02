@@ -3,8 +3,8 @@ import { induceTree } from "./induceTree";
 import data from './data.json'
 
 const dataSet = new DataFrame(data);
-const properties = ['ch', 'de', 'wa', 'in']
-const className = 'ri'
+const properties = ['credit_history', 'debit', 'warranty', 'income']
+const className = 'risk'
 
 const ID3Tree = induceTree(dataSet, className, properties)
 

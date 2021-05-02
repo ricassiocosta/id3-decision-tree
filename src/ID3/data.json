@@ -1,100 +1,100 @@
 [
   {
-    "ri": "high",
-    "ch": "bad",
-    "de": "high",
-    "wa": "none",
-    "in": "$0 - $15k"
+    "risk": "high",
+    "credit_history": "bad",
+    "debit": "high",
+    "warranty": "none",
+    "income": "$0 - $15k"
   },
   {
-    "ri": "high",
-    "ch": "unknown",
-    "de": "high",
-    "wa": "none",
-    "in": "$15 - $35k"
+    "risk": "high",
+    "credit_history": "unknown",
+    "debit": "high",
+    "warranty": "none",
+    "income": "$15 - $35k"
   },
   {
-    "ri": "moderate",
-    "ch": "unknown",
-    "de": "low",
-    "wa": "none",
-    "in": "$15 - $35k"
+    "risk": "moderate",
+    "credit_history": "unknown",
+    "debit": "low",
+    "warranty": "none",
+    "income": "$15 - $35k"
   },
   {
-    "ri": "high",
-    "ch": "unknown",
-    "de": "low",
-    "wa": "none",
-    "in": "$0 - $15k"
+    "risk": "high",
+    "credit_history": "unknown",
+    "debit": "low",
+    "warranty": "none",
+    "income": "$0 - $15k"
   },
   {
-    "ri": "low",
-    "ch": "unknown",
-    "de": "low",
-    "wa": "none",
-    "in": "up to $35k"
+    "risk": "low",
+    "credit_history": "unknown",
+    "debit": "low",
+    "warranty": "none",
+    "income": "up to $35k"
   },
   {
-    "ri": "low",
-    "ch": "unknown",
-    "de": "low",
-    "wa": "appropriate",
-    "in": "up to $35k"
+    "risk": "low",
+    "credit_history": "unknown",
+    "debit": "low",
+    "warranty": "appropriate",
+    "income": "up to $35k"
   },
   {
-    "ri": "high",
-    "ch": "bad",
-    "de": "low",
-    "wa": "none",
-    "in": "$0 - $15k"
+    "risk": "high",
+    "credit_history": "bad",
+    "debit": "low",
+    "warranty": "none",
+    "income": "$0 - $15k"
   },
   {
-    "ri": "moderate",
-    "ch": "bad",
-    "de": "low",
-    "wa": "appropriate",
-    "in": "up to $35k"
+    "risk": "moderate",
+    "credit_history": "bad",
+    "debit": "low",
+    "warranty": "appropriate",
+    "income": "up to $35k"
   },
   {
-    "ri": "low",
-    "ch": "good",
-    "de": "low",
-    "wa": "none",
-    "in": "up to $35k"
+    "risk": "low",
+    "credit_history": "good",
+    "debit": "low",
+    "warranty": "none",
+    "income": "up to $35k"
   },
   {
-    "ri": "low",
-    "ch": "good",
-    "de": "high",
-    "wa": "none",
-    "in": "up to $35k"
+    "risk": "low",
+    "credit_history": "good",
+    "debit": "high",
+    "warranty": "none",
+    "income": "up to $35k"
   },
   {
-    "ri": "high",
-    "ch": "good",
-    "de": "high",
-    "wa": "none",
-    "in": "$0 - $15k"
+    "risk": "high",
+    "credit_history": "good",
+    "debit": "high",
+    "warranty": "none",
+    "income": "$0 - $15k"
   },
   {
-    "ri": "moderate",
-    "ch": "good",
-    "de": "high",
-    "wa": "none",
-    "in": "$15 - $35k"
+    "risk": "moderate",
+    "credit_history": "good",
+    "debit": "high",
+    "warranty": "none",
+    "income": "$15 - $35k"
   },
   {
-    "ri": "low",
-    "ch": "good",
-    "de": "high",
-    "wa": "none",
-    "in": "up to $35k"
+    "risk": "low",
+    "credit_history": "good",
+    "debit": "high",
+    "warranty": "none",
+    "income": "up to $35k"
   },
   {
-    "ri": "high",
-    "ch": "bad",
-    "de": "high",
-    "wa": "none",
-    "in": "$15 - $35k"
+    "risk": "high",
+    "credit_history": "bad",
+    "debit": "high",
+    "warranty": "none",
+    "income": "$15 - $35k"
   }
 ]

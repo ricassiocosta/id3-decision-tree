@@ -1,7 +1,9 @@
 import { Edge, StructuredEdge } from "../Edge";
+import { getRandomKey } from '../utils/general';
 
 interface StructuredNode {
   name: string;
+  key: string;
   children: StructuredEdge[];
   gProps: {
     className: string,
@@ -23,9 +25,10 @@ class Node {
     return edge
   }
 
-  print(): StructuredNode {
+  get(): StructuredNode {
     const node: StructuredNode = {
       name: this.label,
+      key: getRandomKey(),
       children: [],
       gProps: {
         className: 'node'
@@ -33,7 +36,7 @@ class Node {
     }
 
     this.edges.forEach(edge => {
-      node.children.push(edge.print())
+      node.children.push(edge.get())
     })
 
     return node

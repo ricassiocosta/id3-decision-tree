@@ -2,11 +2,11 @@ import { calculateInformationGain } from '../utils/informationGain';
 import { Node } from '../Node';
 
 function getInformationGainByProperty(dataSet: any) {
-  const classValues = dataSet.column('ri').values as string[];
+  const classValues = dataSet.column('risk').values as string[];
   const IGByProperty: any = {};
 
   for (const property of dataSet.columns as string) {
-    if (property !== 'ri') {
+    if (property !== 'risk') {
       const newDataSet = dataSet.column(property).values as string[];
 
       if(newDataSet) {
