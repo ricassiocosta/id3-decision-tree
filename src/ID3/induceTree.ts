@@ -1,8 +1,7 @@
-import { DataFrame } from "danfojs-node";
-import { Node } from './Node';
-import { calculateInformationGain } from "./utils/informationGain";
+import { calculateInformationGain } from '../utils/informationGain';
+import { Node } from '../Node';
 
-function getInformationGainByProperty(dataSet: DataFrame) {
+function getInformationGainByProperty(dataSet: any) {
   const classValues = dataSet.column('ri').values as string[];
   const IGByProperty: any = {};
 
@@ -24,7 +23,7 @@ interface InformationGain {
   gain: number;
 }
 
-function getBestProperty(dataSet: DataFrame) {
+function getBestProperty(dataSet: any) {
   const ig: InformationGain = {
     gain: 0
   }
@@ -46,8 +45,8 @@ function getBestProperty(dataSet: DataFrame) {
   }
 }
 
-function induceTree(dataSet: DataFrame, className: string, properties: string[]) {
-  const currentProperties = [... properties]
+function induceTree(dataSet: any, className: string, properties: string[]): Node {
+  const currentProperties = [...properties]
 
   if(dataSet.column(className).unique().values.length == 1) {
     const data = dataSet.column(className).unique().values;

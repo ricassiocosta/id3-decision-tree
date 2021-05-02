@@ -38,4 +38,5 @@ class Edge {
   }
 }
 
-export { Edge, StructuredEdge }
+export { Edge };export type { StructuredEdge };
+

@@ -32,7 +32,7 @@ class Node {
       }
     }
 
-    this.edges.map(edge => {
+    this.edges.forEach(edge => {
       node.children.push(edge.print())
     })
 
@@ -40,4 +40,5 @@ class Node {
   }
 }
 
-export { Node, StructuredNode }
+export { Node };export type { StructuredNode };
+
