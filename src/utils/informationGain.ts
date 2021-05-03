@@ -1,5 +1,5 @@
-function calculateInformationGain(dataSet: string[], targetDataSet: string[]) {
-  const { entropy, entropiesOptions, probabilities } = getEntropy(dataSet, targetDataSet)
+function calculateInformationGain(samplesSet: string[], targetSamplesSet: string[]) {
+  const { entropy, entropiesOptions, probabilities } = getEntropy(samplesSet, targetSamplesSet)
 
   let informationGain = entropy
   for (const currentEntropy in entropiesOptions) {
@@ -9,17 +9,16 @@ function calculateInformationGain(dataSet: string[], targetDataSet: string[]) {
   return informationGain
 }
 
-function getEntropy(dataSet: string[], targetDataSet: string[]) {
+function getEntropy(samplesSet: string[], targetSamplesSet: string[]) {
   let entropy = 0;
   const entropiesOptions: any = {};
   const currentOccurrences: any = {};
   const noCurrentOccurrences: any = {};
   const targetOccurrences: any = {};
   const probabilities: any = {};
-  const totalLength = dataSet.length
 
-  dataSet.forEach((value, index) => {
-    const targetValue = targetDataSet[index]
+  samplesSet.forEach((value, index) => {
+    const targetValue = targetSamplesSet[index]
 
     if (!(value in currentOccurrences)){
       currentOccurrences[value] = {}
@@ -36,13 +35,13 @@ function getEntropy(dataSet: string[], targetDataSet: string[]) {
     noCurrentOccurrences[value] += 1
   })
 
-  targetDataSet.forEach(value => {
+  targetSamplesSet.forEach(value => {
     if (!(value in targetOccurrences))
       targetOccurrences[value] = 0
     targetOccurrences[value] += 1
   })
 
-  const noOccurrences = targetDataSet.length
+  const noOccurrences = targetSamplesSet.length
 
   for (const occurrences in targetOccurrences) {
     const occurrenceValue = targetOccurrences[occurrences]
@@ -64,7 +63,7 @@ function getEntropy(dataSet: string[], targetDataSet: string[]) {
       entropyOption += - (probability * Math.log2(probability))
     }
 
-    probabilities[currentOccurrence] = totalNoOption/totalLength
+    probabilities[currentOccurrence] = totalNoOption/samplesSet.length
     entropiesOptions[currentOccurrence] = entropyOption
   }
 
@@ -72,4 +71,4 @@ function getEntropy(dataSet: string[], targetDataSet: string[]) {
 }
 
 
-export {getEntropy as calculateEntropy, calculateInformationGain}
+export {getEntropy, calculateInformationGain}
