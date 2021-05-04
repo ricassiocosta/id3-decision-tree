@@ -7,18 +7,18 @@ function calculateInformationGain(goalSampleSet: string[], classValuesSampleSet:
   return informationGain
 }
 
-function getTotalEntropy(classValuesSampleSet: string[]) {
+function getTotalEntropy(sampleSet: string[]) {
   let entropy = 0
-  const classValues: any = {};
-  classValuesSampleSet.forEach(value => {
-    if (!(value in classValues))
-      classValues[value] = 0
-    classValues[value] += 1
+  const sampleSetValues: any = {};
+  sampleSet.forEach(value => {
+    if (!(value in sampleSetValues))
+      sampleSetValues[value] = 0
+    sampleSetValues[value] += 1
   })
 
-  for (const classValue in classValues) {
-    const occurrences = classValues[classValue]
-    const probability = occurrences/classValuesSampleSet.length
+  for (const value in sampleSetValues) {
+    const occurrences = sampleSetValues[value]
+    const probability = occurrences/sampleSet.length
     entropy += -(probability * Math.log2(probability))
   }
 
