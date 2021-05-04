@@ -10,6 +10,7 @@ function getInformationGainByProperty(samplesSet: any) {
       const newSamplesSet = samplesSet.column(property).values as string[];
 
       if(newSamplesSet) {
+        console.log('property', property);
         IGByProperty[property] = calculateInformationGain(newSamplesSet, classValues);
       }
     }
