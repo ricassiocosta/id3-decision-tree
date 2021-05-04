@@ -1,4 +1,4 @@
-import { calculateInformationGain } from '../utils/informationGain';
+import { getInformationGain } from '../utils/informationGain';
 import { Node } from '../Node';
 
 function getInformationGainByProperty(goalSampleSet: any) {
@@ -10,7 +10,7 @@ function getInformationGainByProperty(goalSampleSet: any) {
       const newSamplesSet = goalSampleSet.column(property).values as string[];
 
       if(newSamplesSet) {
-        IGByProperty[property] = calculateInformationGain(newSamplesSet, classValues);
+        IGByProperty[property] = getInformationGain(newSamplesSet, classValues);
       }
     }
   }

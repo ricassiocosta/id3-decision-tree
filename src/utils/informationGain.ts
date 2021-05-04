@@ -1,4 +1,5 @@
-function calculateInformationGain(goalSampleSet: string[], classValuesSampleSet: string[]) {
+// calculates the total information gain of a set based on a class set
+function getInformationGain(goalSampleSet: string[], classValuesSampleSet: string[]) {
   const sampleSetEntropy = getTotalEntropy(classValuesSampleSet)
   const obtainedEntropy = getGoalSampleSetEntropy(goalSampleSet, classValuesSampleSet)
 
@@ -7,6 +8,7 @@ function calculateInformationGain(goalSampleSet: string[], classValuesSampleSet:
   return informationGain
 }
 
+// calculates the total entropy for a given sample set
 function getTotalEntropy(sampleSet: string[]) {
   let entropy = 0
   const sampleSetValues: any = {};
@@ -25,6 +27,7 @@ function getTotalEntropy(sampleSet: string[]) {
   return entropy
 }
 
+// calculates the obtained entropy of an sample set, based on a class set.
 function getGoalSampleSetEntropy(goalSampleSet: string[], classValuesSampleSet: string[]) {
   const { classOccurrencesByGoalValue, goalOccurrences} = getSampleSetOccurrences(goalSampleSet, classValuesSampleSet)
   const sampleSetGoalValueEntropy: any = {};
@@ -56,6 +59,7 @@ function getGoalSampleSetEntropy(goalSampleSet: string[], classValuesSampleSet: 
   return obtainedEntropy
 }
 
+// counts the number of occurrences of goal values and the occurrence of class values for each goal value 
 function getSampleSetOccurrences(goalSampleSet: string[], classValuesSampleSet: string[]) {
   const classOccurrencesByGoalValue: any = {};
   const goalOccurrences: any = {};
@@ -83,4 +87,4 @@ function getSampleSetOccurrences(goalSampleSet: string[], classValuesSampleSet: 
   return { classOccurrencesByGoalValue, goalOccurrences}
 }
 
-export { calculateInformationGain }
+export { getInformationGain }
