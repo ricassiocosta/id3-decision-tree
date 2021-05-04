@@ -1,16 +1,15 @@
 import { calculateInformationGain } from '../utils/informationGain';
 import { Node } from '../Node';
 
-function getInformationGainByProperty(samplesSet: any) {
-  const classValues = samplesSet.column('risk').values as string[];
+function getInformationGainByProperty(goalSampleSet: any) {
+  const classValues = goalSampleSet.column('risk').values as string[];
   const IGByProperty: any = {};
 
-  for (const property of samplesSet.columns as string) {
+  for (const property of goalSampleSet.columns as string) {
     if (property !== 'risk') {
-      const newSamplesSet = samplesSet.column(property).values as string[];
+      const newSamplesSet = goalSampleSet.column(property).values as string[];
 
       if(newSamplesSet) {
-        console.log('property', property);
         IGByProperty[property] = calculateInformationGain(newSamplesSet, classValues);
       }
     }
@@ -24,12 +23,12 @@ interface InformationGain {
   gain: number;
 }
 
-function getBestProperty(samplesSet: any) {
+function getBestProperty(goalSampleSet: any) {
   const ig: InformationGain = {
     gain: 0
   }
 
-  const IGByProperty = getInformationGainByProperty(samplesSet)
+  const IGByProperty = getInformationGainByProperty(goalSampleSet)
   for (const property in IGByProperty) {
     const propertyInfoGain = IGByProperty[property];
 
@@ -46,13 +45,13 @@ function getBestProperty(samplesSet: any) {
   }
 }
 
-function induceTree(samplesSet: any, className: string, properties: string[]): Node {
+function induceTree(goalSampleSet: any, className: string, properties: string[]): Node {
   const actualProperties = [...properties]
 
   // if all elements in the samples set belongs to the same class
   // a leaf node is returned
-  if(samplesSet.column(className).unique().values.length === 1) {
-    const data = samplesSet.column(className).unique().values;
+  if(goalSampleSet.column(className).unique().values.length === 1) {
+    const data = goalSampleSet.column(className).unique().values;
 
     if(data) {
       const node = new Node(`Risk is: ${data[0]}`);
@@ -68,7 +67,7 @@ function induceTree(samplesSet: any, className: string, properties: string[]): N
 
     return node;
   } else {
-    const bestProperty = getBestProperty(samplesSet)
+    const bestProperty = getBestProperty(goalSampleSet)
 
     const node = new Node(bestProperty)
     const bestPropertyIndex = actualProperties.indexOf(bestProperty)
@@ -76,11 +75,11 @@ function induceTree(samplesSet: any, className: string, properties: string[]): N
     // remove bestProperty from currentProperties
     actualProperties.splice(bestPropertyIndex, 1)
 
-    const bestPropertyUniqueValues = samplesSet.column(bestProperty).unique().values
+    const bestPropertyUniqueValues = goalSampleSet.column(bestProperty).unique().values
     for (const label of bestPropertyUniqueValues) {
       const edge = node.addEdge(label)
 
-      const samplesSetPartition = samplesSet.query({ "column": bestProperty, "is": "==", "to": label })
+      const samplesSetPartition = goalSampleSet.query({ "column": bestProperty, "is": "==", "to": label })
       const subNode = induceTree(samplesSetPartition, className, actualProperties)
 
       if(subNode) {

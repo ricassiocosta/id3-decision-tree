@@ -1,94 +1,87 @@
-// mensura a quantidade de informação possível de extrair de uma propriedade. É obtido por meio de 
-// comparação
-function calculateInformationGain(samplesSet: string[], targetSamplesSet: string[]) {
-  // entropia mede o caos de um conjunto
-  // base: entropia de toda uma coluna específica menos a entropia de cada
-  // subárvore (partições que correpondem às linhas que tem um determinado valor de uma det. propriedade) 
-  const { entropy, entropiesOptions, probabilities } = getEntropy(samplesSet, targetSamplesSet)
+function calculateInformationGain(goalSampleSet: string[], classValuesSampleSet: string[]) {
+  const sampleSetEntropy = getTotalEntropy(classValuesSampleSet)
+  const obtainedEntropy = getSampleSetGoalValueEntropyAndProbability(goalSampleSet, classValuesSampleSet)
 
-  // entropia de toda uma coluna específica (exemplo, pra HC, pra GA...)
-  let informationGain = entropy
-  console.log('informationGain', informationGain)
-  // entropiesOptions é a entropia de cada coluna, para cada um de seus possíveis valores
-  console.log('entropiesOptions', entropiesOptions)
-  for (const currentEntropy in entropiesOptions) {
-    // propabilidade de ocorrer cada um multiplicada pela entropia do subset
-    informationGain += - (probabilities[currentEntropy] * entropiesOptions[currentEntropy])
-  }
+  const informationGain = sampleSetEntropy - obtainedEntropy
 
   return informationGain
 }
 
-function getEntropy(samplesSet: string[], targetSamplesSet: string[]) {
-  let entropy = 0; // entropia correspondente a um conjunto homogêneo
-  const entropiesOptions: any = {};
-  const occurrencesQuantityByPossibleValue: any = {};
-  const currentOccurrencesQuantity: any = {};
-  const possibleClassValues: any = {}; // ocorrências possíveis da classe
-  const probabilities: any = {}; // probalidades de toda uma coluna, desconsiderando dos possíveis valores
-
-  // faz a contagem de cada possibilidade
-  samplesSet.forEach((value, index) => {
-    const targetValue = targetSamplesSet[index]
-
-    if (!(value in occurrencesQuantityByPossibleValue)){
-      occurrencesQuantityByPossibleValue[value] = {}
-    }
-
-    if (!(targetValue in occurrencesQuantityByPossibleValue[value]))
-      occurrencesQuantityByPossibleValue[value][targetValue] = 0;
-
-    occurrencesQuantityByPossibleValue[value][targetValue] += 1
-
-    if (!(value in currentOccurrencesQuantity))
-      currentOccurrencesQuantity[value] = 0;
-
-    currentOccurrencesQuantity[value] += 1
+function getTotalEntropy(classValuesSampleSet: string[]) {
+  console.log(classValuesSampleSet)
+  let entropy = 0
+  const classValues: any = {};
+  classValuesSampleSet.forEach(value => {
+    if (!(value in classValues))
+      classValues[value] = 0
+    classValues[value] += 1
   })
 
-  targetSamplesSet.forEach(value => {
-    if (!(value in possibleClassValues))
-      possibleClassValues[value] = 0
-    possibleClassValues[value] += 1
-  })
-
-  const occurrencesQuantity = targetSamplesSet.length
-
-  // calcula a entropia geral da coluna, desconsiderando a entropia de cada possibilidade
-  // todas as colunas, não divindo o HC, por exemplo, nas possibilidade, considerando como um só
-  for (const occurrences in possibleClassValues) {
-    const occurrenceValue = possibleClassValues[occurrences]
-    const probability = occurrenceValue/occurrencesQuantity
+  for (const occurrences in classValues) {
+    const occurrenceValue = classValues[occurrences]
+    const probability = occurrenceValue/classValuesSampleSet.length
     entropy += -(probability * Math.log2(probability))
   }
 
-  // calcula a entropia de cada partição, considerando cada possibilidade
-  for (const currentOccurrence in occurrencesQuantityByPossibleValue) {
-    let entropyOption = 0
-    let totalNoOption = 0
-
-    if (!(currentOccurrence in entropiesOptions))
-      entropiesOptions[currentOccurrence] = 0
-
-    for (const currentOption in occurrencesQuantityByPossibleValue[currentOccurrence]) {
-      const noOption = occurrencesQuantityByPossibleValue[currentOccurrence][currentOption]
-      totalNoOption += noOption
-      const probability = noOption/currentOccurrencesQuantity[currentOccurrence]
-      entropyOption += - (probability * Math.log2(probability))
-    }
-
-    probabilities[currentOccurrence] = totalNoOption/samplesSet.length
-    entropiesOptions[currentOccurrence] = entropyOption
-  }
-
-  console.log('entropiesOptions', entropiesOptions)
-  console.log('currentOccurrences', occurrencesQuantityByPossibleValue) 
-  console.log('currentOccurrencesQuantity', currentOccurrencesQuantity)
-  console.log('possibleClassValues', possibleClassValues) 
-  console.log('probabilities', probabilities)
-
-  return { entropy, entropiesOptions, probabilities }
+  return entropy
 }
 
+function getSampleSetGoalValueEntropyAndProbability(goalSampleSet: string[], classValuesSampleSet: string[]) {
+  const { classOccurrencesByGoalValue, goalOccurrences} = getSampleSetOccurrences(goalSampleSet, classValuesSampleSet)
+  const sampleSetGoalValueEntropy: any = {};
+  const sampleSetValueProbability: any = {};
 
-export {getEntropy, calculateInformationGain}
+  for (const goalValue in classOccurrencesByGoalValue) {
+    if (!(goalValue in sampleSetGoalValueEntropy)) {
+      sampleSetGoalValueEntropy[goalValue] = 0
+    }
+
+    let classValueTotalOccurrence = 0
+    let goalValueEntropy = 0
+    for (const classValue in classOccurrencesByGoalValue[goalValue]) {
+      const classValueOccurrence = classOccurrencesByGoalValue[goalValue][classValue]
+      classValueTotalOccurrence += classValueOccurrence
+      const probability = classValueOccurrence/goalOccurrences[goalValue]
+      goalValueEntropy += - (probability * Math.log2(probability))
+    }
+
+    sampleSetValueProbability[goalValue] = classValueTotalOccurrence/goalSampleSet.length
+    sampleSetGoalValueEntropy[goalValue] = goalValueEntropy
+  }
+
+  let obtainedEntropy = 0
+  for (const value in sampleSetGoalValueEntropy) {
+    obtainedEntropy +=  sampleSetValueProbability[value] * sampleSetGoalValueEntropy[value]
+  }
+
+  return obtainedEntropy
+}
+
+function getSampleSetOccurrences(goalSampleSet: string[], classValuesSampleSet: string[]) {
+  const classOccurrencesByGoalValue: any = {};
+  const goalOccurrences: any = {};
+
+  goalSampleSet.forEach((value, index) => {
+    const classValue = classValuesSampleSet[index]
+
+    if (!(value in classOccurrencesByGoalValue)) {
+      classOccurrencesByGoalValue[value] = {}
+    }
+
+    if (!(classValue in classOccurrencesByGoalValue[value])) {
+      classOccurrencesByGoalValue[value][classValue] = 0;
+    }
+
+    classOccurrencesByGoalValue[value][classValue] += 1
+
+    if (!(value in goalOccurrences)) {
+      goalOccurrences[value] = 0;
+    }
+
+    goalOccurrences[value] += 1
+  })
+
+  return { classOccurrencesByGoalValue, goalOccurrences}
+}
+
+export { calculateInformationGain }
