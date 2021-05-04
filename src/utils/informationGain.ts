@@ -1,6 +1,6 @@
 function calculateInformationGain(goalSampleSet: string[], classValuesSampleSet: string[]) {
   const sampleSetEntropy = getTotalEntropy(classValuesSampleSet)
-  const obtainedEntropy = getSampleSetGoalValueEntropyAndProbability(goalSampleSet, classValuesSampleSet)
+  const obtainedEntropy = getGoalSampleSetEntropy(goalSampleSet, classValuesSampleSet)
 
   const informationGain = sampleSetEntropy - obtainedEntropy
 
@@ -26,7 +26,7 @@ function getTotalEntropy(classValuesSampleSet: string[]) {
   return entropy
 }
 
-function getSampleSetGoalValueEntropyAndProbability(goalSampleSet: string[], classValuesSampleSet: string[]) {
+function getGoalSampleSetEntropy(goalSampleSet: string[], classValuesSampleSet: string[]) {
   const { classOccurrencesByGoalValue, goalOccurrences} = getSampleSetOccurrences(goalSampleSet, classValuesSampleSet)
   const sampleSetGoalValueEntropy: any = {};
   const sampleSetValueProbability: any = {};
