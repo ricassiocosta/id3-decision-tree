@@ -1,9 +1,15 @@
 // calculates the total information gain of a set based on a class set
 function getInformationGain(goalSampleSet: string[], classValuesSampleSet: string[]) {
-  const sampleSetEntropy = getTotalEntropy(classValuesSampleSet)
+  const totalEntropy = getTotalEntropy(classValuesSampleSet)
   const obtainedEntropy = getGoalSampleSetEntropy(goalSampleSet, classValuesSampleSet)
 
-  const informationGain = sampleSetEntropy - obtainedEntropy
+  const informationGain = totalEntropy - obtainedEntropy
+
+  // console.log('______________________________')
+  // console.log('total entropy:', totalEntropy)
+  // console.log('goalSampleSet:', goalSampleSet)
+  // console.log('information gain:', informationGain)
+  // console.log('______________________________')
 
   return informationGain
 }

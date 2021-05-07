@@ -1,16 +1,20 @@
 import { getInformationGain } from '../utils/informationGain';
 import { Node } from '../Node';
 
-function getInformationGainByProperty(goalSampleSet: any) {
-  const classValues = goalSampleSet.column('risk').values as string[];
+function getInformationGainByProperty(goalSampleSet: any, className: string) {
+  const classValues = goalSampleSet.column(className).values as string[];
   const IGByProperty: any = {};
 
   for (const property of goalSampleSet.columns as string) {
-    if (property !== 'risk') {
+    if (property !== className) {
       const newSamplesSet = goalSampleSet.column(property).values as string[];
 
       if(newSamplesSet) {
+        console.log(newSamplesSet)
+        console.log(classValues)
         IGByProperty[property] = getInformationGain(newSamplesSet, classValues);
+        console.log(IGByProperty[property])
+        console.log('=======================')
       }
     }
   }
@@ -23,12 +27,11 @@ interface InformationGain {
   gain: number;
 }
 
-function getBestProperty(goalSampleSet: any) {
+function getBestProperty(goalSampleSet: any, className: string) {
   const ig: InformationGain = {
     gain: 0
   }
-
-  const IGByProperty = getInformationGainByProperty(goalSampleSet)
+  const IGByProperty = getInformationGainByProperty(goalSampleSet, className)
   for (const property in IGByProperty) {
     const propertyInfoGain = IGByProperty[property];
 
@@ -54,7 +57,7 @@ function induceTree(goalSampleSet: any, className: string, properties: string[])
     const data = goalSampleSet.column(className).unique().values;
 
     if(data) {
-      const node = new Node(`Risk is: ${data[0]}`);
+      const node = new Node(`${className} is: ${data[0]}`);
 
       return node;
     }
@@ -63,11 +66,11 @@ function induceTree(goalSampleSet: any, className: string, properties: string[])
   // if the properties are empty, a leaf node is returned 
   // with the disjunction of all classes
   if(actualProperties.length === 0) {
-    const node = new Node('Risk is: High or Moderate or Low');
+    const node = new Node(`${className} is: ${goalSampleSet.column(className).unique().values}`);
 
     return node;
   } else {
-    const bestProperty = getBestProperty(goalSampleSet)
+    const bestProperty = getBestProperty(goalSampleSet, className)
 
     const node = new Node(bestProperty)
     const bestPropertyIndex = actualProperties.indexOf(bestProperty)

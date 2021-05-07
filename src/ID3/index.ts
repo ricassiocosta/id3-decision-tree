@@ -1,10 +1,10 @@
 import { DataFrame } from "danfojs/src/index";
 import { induceTree } from "./induceTree";
-import data from './data.json'
+import data from './tennis.json'
 
 const goalSampleSet = new DataFrame(data);
-const properties = ['credit_history', 'debit', 'warranty', 'income']
-const className = 'risk'
+const properties = goalSampleSet.columns
+const className = goalSampleSet.columns[0]
 
 const ID3Tree = induceTree(goalSampleSet, className, properties)
 
