@@ -1,0 +1,86 @@
+[
+  {
+    "infected": "no",
+    "fever": "no",
+    "cough": "no",
+    "breathing_issues": "no"
+  },
+  {
+    "infected": "yes",
+    "fever": "yes",
+    "cough": "yes",
+    "breathing_issues": "yes"
+  },
+  {
+    "infected": "no",
+    "fever": "yes",
+    "cough": "yes",
+    "breathing_issues": "no"
+  },
+  {
+    "infected": "yes",
+    "fever": "yes",
+    "cough": "no",
+    "breathing_issues": "yes"
+  },
+  {
+    "infected": "yes",
+    "fever": "yes",
+    "cough": "yes",
+    "breathing_issues": "yes"
+  },
+  {
+    "infected": "no",
+    "fever": "no",
+    "cough": "yes",
+    "breathing_issues": "no"
+  },
+  {
+    "infected": "yes",
+    "fever": "yes",
+    "cough": "no",
+    "breathing_issues": "yes"
+  },
+  {
+    "infected": "yes",
+    "fever": "yes",
+    "cough": "no",
+    "breathing_issues": "yes"
+  },
+  {
+    "infected": "yes",
+    "fever": "no",
+    "cough": "yes",
+    "breathing_issues": "yes"
+  },
+  {
+    "infected": "yes",
+    "fever": "yes",
+    "cough": "yes",
+    "breathing_issues": "no"
+  },
+  {
+    "infected": "no",
+    "fever": "no",
+    "cough": "yes",
+    "breathing_issues": "no"
+  },
+  {
+    "infected": "yes",
+    "fever": "no",
+    "cough": "yes",
+    "breathing_issues": "yes"
+  },
+  {
+    "infected": "no",
+    "fever": "no",
+    "cough": "yes",
+    "breathing_issues": "yes"
+  },
+  {
+    "infected": "no",
+    "fever": "yes",
+    "cough": "yes",
+    "breathing_issues": "no"
+  }
+]

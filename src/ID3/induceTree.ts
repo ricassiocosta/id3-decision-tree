@@ -1,7 +1,8 @@
+import { DataFrame } from 'danfojs-node'
 import { getInformationGain } from '../utils/informationGain';
 import { Node } from '../Node';
 
-function getInformationGainByProperty(goalSampleSet: any, className: string) {
+function getInformationGainByProperty(goalSampleSet: DataFrame, className: string) {
   const classValues = goalSampleSet.column(className).values as string[];
   const IGByProperty: any = {};
 
@@ -10,11 +11,7 @@ function getInformationGainByProperty(goalSampleSet: any, className: string) {
       const newSamplesSet = goalSampleSet.column(property).values as string[];
 
       if(newSamplesSet) {
-        console.log(newSamplesSet)
-        console.log(classValues)
         IGByProperty[property] = getInformationGain(newSamplesSet, classValues);
-        console.log(IGByProperty[property])
-        console.log('=======================')
       }
     }
   }
@@ -27,7 +24,7 @@ interface InformationGain {
   gain: number;
 }
 
-function getBestProperty(goalSampleSet: any, className: string) {
+function getBestProperty(goalSampleSet: DataFrame, className: string) {
   const ig: InformationGain = {
     gain: 0
   }
@@ -48,7 +45,7 @@ function getBestProperty(goalSampleSet: any, className: string) {
   }
 }
 
-function induceTree(goalSampleSet: any, className: string, properties: string[]): Node {
+function induceTree(goalSampleSet: DataFrame, className: string, properties: string[]): Node {
   const actualProperties = [...properties]
 
   // if all elements in the samples set belongs to the same class

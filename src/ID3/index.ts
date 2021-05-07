@@ -1,10 +1,14 @@
-import { DataFrame } from "danfojs/src/index";
+import { DataFrame as DF } from "danfojs/src/index";
+import { DataFrame } from 'danfojs-node'
 import { induceTree } from "./induceTree";
-import data from './tennis.json'
+import data from './sickness.json'
 
-const goalSampleSet = new DataFrame(data);
-const properties = goalSampleSet.columns
-const className = goalSampleSet.columns[0]
+const goalSampleSet = new DF(data) as DataFrame;
+const columns = [...goalSampleSet.columns] as string[];
+const className = columns[0]
+const classNameIndex = columns.indexOf(className)
+columns.splice(classNameIndex, 1)
+const properties = columns
 
 const ID3Tree = induceTree(goalSampleSet, className, properties)
 

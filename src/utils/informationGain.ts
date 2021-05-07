@@ -5,11 +5,13 @@ function getInformationGain(goalSampleSet: string[], classValuesSampleSet: strin
 
   const informationGain = totalEntropy - obtainedEntropy
 
-  // console.log('______________________________')
-  // console.log('total entropy:', totalEntropy)
-  // console.log('goalSampleSet:', goalSampleSet)
-  // console.log('information gain:', informationGain)
-  // console.log('______________________________')
+  console.log('______________________________')
+  console.log('total entropy:', totalEntropy)
+  console.log('goalSampleSet:', goalSampleSet)
+  console.log('classValuesSampleSet:', classValuesSampleSet)
+  console.log('information gain:', informationGain)
+  console.log('obtainedEntropy:', obtainedEntropy)
+  console.log('______________________________')
 
   return informationGain
 }
