@@ -63,7 +63,13 @@ function induceTree(goalSampleSet: DataFrame, className: string, properties: str
   // if the properties are empty, a leaf node is returned 
   // with the disjunction of all classes
   if(actualProperties.length === 0) {
-    const node = new Node(`${className} is: ${goalSampleSet.column(className).unique().values}`);
+    let disjunction = ''
+
+    for(const label of goalSampleSet.column(className).unique().values) {
+      disjunction ? disjunction = `${disjunction} OR ${label}` : disjunction = label
+    }
+
+    const node = new Node(`${className} is: ${disjunction}`);
 
     return node;
   } else {

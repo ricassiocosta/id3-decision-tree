@@ -1,7 +1,7 @@
 import { DataFrame as DF } from "danfojs/src/index";
 import { DataFrame } from 'danfojs-node'
 import { induceTree } from "./induceTree";
-import data from './sickness.json'
+import data from './bank.json'
 
 const goalSampleSet = new DF(data) as DataFrame;
 const columns = [...goalSampleSet.columns] as string[];
