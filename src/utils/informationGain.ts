@@ -1,13 +1,13 @@
 // calculates the total information gain of a set based on a class set
-function getInformationGain(goalSampleSet: string[], classValuesSampleSet: string[]) {
+function getInformationGain(sampleSet: string[], classValuesSampleSet: string[]) {
   const totalEntropy = getTotalEntropy(classValuesSampleSet)
-  const obtainedEntropy = getGoalSampleSetEntropy(goalSampleSet, classValuesSampleSet)
+  const obtainedEntropy = getGoalSampleSetEntropy(sampleSet, classValuesSampleSet)
 
   const informationGain = totalEntropy - obtainedEntropy
 
   console.log('______________________________')
   console.log('total entropy:', totalEntropy)
-  console.log('goalSampleSet:', goalSampleSet)
+  console.log('sampleSet:', sampleSet)
   console.log('classValuesSampleSet:', classValuesSampleSet)
   console.log('information gain:', informationGain)
   console.log('obtainedEntropy:', obtainedEntropy)
@@ -36,8 +36,8 @@ function getTotalEntropy(sampleSet: string[]) {
 }
 
 // calculates the obtained entropy of an sample set, based on a class set.
-function getGoalSampleSetEntropy(goalSampleSet: string[], classValuesSampleSet: string[]) {
-  const { classOccurrencesByGoalValue, goalOccurrences} = getSampleSetOccurrences(goalSampleSet, classValuesSampleSet)
+function getGoalSampleSetEntropy(sampleSet: string[], classValuesSampleSet: string[]) {
+  const { classOccurrencesByGoalValue, goalOccurrences} = getSampleSetOccurrences(sampleSet, classValuesSampleSet)
   const sampleSetGoalValueEntropy: any = {};
   const sampleSetValueProbability: any = {};
 
@@ -55,7 +55,7 @@ function getGoalSampleSetEntropy(goalSampleSet: string[], classValuesSampleSet: 
       goalValueEntropy += - (probability * Math.log2(probability))
     }
 
-    sampleSetValueProbability[goalValue] = classValueTotalOccurrence/goalSampleSet.length
+    sampleSetValueProbability[goalValue] = classValueTotalOccurrence/sampleSet.length
     sampleSetGoalValueEntropy[goalValue] = goalValueEntropy
   }
 
@@ -68,11 +68,11 @@ function getGoalSampleSetEntropy(goalSampleSet: string[], classValuesSampleSet: 
 }
 
 // counts the number of occurrences of goal values and the occurrence of class values for each goal value 
-function getSampleSetOccurrences(goalSampleSet: string[], classValuesSampleSet: string[]) {
+function getSampleSetOccurrences(sampleSet: string[], classValuesSampleSet: string[]) {
   const classOccurrencesByGoalValue: any = {};
   const goalOccurrences: any = {};
 
-  goalSampleSet.forEach((value, index) => {
+  sampleSet.forEach((value, index) => {
     const classValue = classValuesSampleSet[index]
 
     if (!(value in classOccurrencesByGoalValue)) {

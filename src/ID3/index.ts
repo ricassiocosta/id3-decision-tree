@@ -3,13 +3,15 @@ import { DataFrame } from 'danfojs-node'
 import { induceTree } from "./induceTree";
 import data from './bank.json'
 
-const goalSampleSet = new DF(data) as DataFrame;
-const columns = [...goalSampleSet.columns] as string[];
-const className = columns[0]
-const classNameIndex = columns.indexOf(className)
-columns.splice(classNameIndex, 1)
+const sampleSet = new DF(data) as DataFrame;
+const columns = [...sampleSet.columns] as string[];
+const className = columns.pop()
 const properties = columns
 
-const ID3Tree = induceTree(goalSampleSet, className, properties)
+if(!className) {
+  throw new Error('Class name is undefined')
+}
+
+const ID3Tree = induceTree(sampleSet, className, properties)
 
 export { ID3Tree }

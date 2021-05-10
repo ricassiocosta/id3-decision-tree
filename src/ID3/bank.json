@@ -1,100 +1,100 @@
 [
   {
-    "risk": "high",
     "credit_history": "bad",
     "debit": "high",
     "warranty": "none",
-    "income": "$0 - $15k"
+    "income": "$0 - $15k",
+    "risk": "high"
   },
   {
-    "risk": "high",
     "credit_history": "unknown",
     "debit": "high",
     "warranty": "none",
-    "income": "$15 - $35k"
+    "income": "$15 - $35k",
+    "risk": "high"
   },
   {
-    "risk": "moderate",
     "credit_history": "unknown",
     "debit": "low",
     "warranty": "none",
-    "income": "$15 - $35k"
+    "income": "$15 - $35k",
+    "risk": "moderate"
   },
   {
-    "risk": "high",
     "credit_history": "unknown",
     "debit": "low",
     "warranty": "none",
-    "income": "$0 - $15k"
+    "income": "$0 - $15k",
+    "risk": "high"
   },
   {
-    "risk": "low",
     "credit_history": "unknown",
     "debit": "low",
     "warranty": "none",
-    "income": "up to $35k"
+    "income": "up to $35k",
+    "risk": "low"
   },
   {
-    "risk": "low",
     "credit_history": "unknown",
     "debit": "low",
     "warranty": "appropriate",
-    "income": "up to $35k"
+    "income": "up to $35k",
+    "risk": "low"
   },
   {
-    "risk": "high",
     "credit_history": "bad",
     "debit": "low",
     "warranty": "none",
-    "income": "$0 - $15k"
+    "income": "$0 - $15k",
+    "risk": "high"
   },
   {
-    "risk": "moderate",
     "credit_history": "bad",
     "debit": "low",
     "warranty": "appropriate",
-    "income": "up to $35k"
+    "income": "up to $35k",
+    "risk": "moderate"
   },
   {
-    "risk": "low",
     "credit_history": "good",
     "debit": "low",
     "warranty": "none",
-    "income": "up to $35k"
+    "income": "up to $35k",
+    "risk": "low"
   },
   {
-    "risk": "low",
     "credit_history": "good",
     "debit": "high",
     "warranty": "none",
-    "income": "up to $35k"
+    "income": "up to $35k",
+    "risk": "low"
   },
   {
-    "risk": "high",
     "credit_history": "good",
     "debit": "high",
     "warranty": "none",
-    "income": "$0 - $15k"
+    "income": "$0 - $15k",
+    "risk": "high"
   },
   {
-    "risk": "moderate",
     "credit_history": "good",
     "debit": "high",
     "warranty": "none",
-    "income": "$15 - $35k"
+    "income": "$15 - $35k",
+    "risk": "moderate"
   },
   {
-    "risk": "low",
     "credit_history": "good",
     "debit": "high",
     "warranty": "none",
-    "income": "up to $35k"
+    "income": "up to $35k",
+    "risk": "low"
   },
   {
-    "risk": "high",
     "credit_history": "bad",
     "debit": "high",
     "warranty": "none",
-    "income": "$15 - $35k"
+    "income": "$15 - $35k",
+    "risk": "high"
   }
 ]
