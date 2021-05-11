@@ -6,11 +6,10 @@ function getInformationGain(sampleSet: string[], classValuesSampleSet: string[])
   const informationGain = totalEntropy - obtainedEntropy
 
   console.log('______________________________')
-  console.log('total entropy:', totalEntropy)
   console.log('sampleSet:', sampleSet)
-  console.log('classValuesSampleSet:', classValuesSampleSet)
-  console.log('information gain:', informationGain)
+  console.log('total entropy:', totalEntropy)
   console.log('obtainedEntropy:', obtainedEntropy)
+  console.log('information gain:', informationGain)
   console.log('______________________________')
 
   return informationGain
@@ -28,8 +27,8 @@ function getTotalEntropy(sampleSet: string[]) {
 
   for (const value in sampleSetValues) {
     const occurrences = sampleSetValues[value]
-    const probability = occurrences/sampleSet.length
-    entropy += -(probability * Math.log2(probability))
+    const frequency = occurrences/sampleSet.length
+    entropy += -(frequency * Math.log2(frequency))
   }
 
   return entropy
@@ -39,7 +38,7 @@ function getTotalEntropy(sampleSet: string[]) {
 function getSampleSetEntropy(sampleSet: string[], classValuesSampleSet: string[]) {
   const { classValueOccurrencesBySampleSetValue, sampleSetValueOccurrences} = getOccurrences(sampleSet, classValuesSampleSet)
   const sampleSetValueEntropy: any = {};
-  const sampleSetValueProbability: any = {};
+  const sampleSetValueFrequency: any = {};
 
   for (const sampleSetValue in classValueOccurrencesBySampleSetValue) {
     if (!(sampleSetValue in sampleSetValueEntropy)) {
@@ -51,17 +50,17 @@ function getSampleSetEntropy(sampleSet: string[], classValuesSampleSet: string[]
     for (const classValue in classValueOccurrencesBySampleSetValue[sampleSetValue]) {
       const classValueOccurrence = classValueOccurrencesBySampleSetValue[sampleSetValue][classValue]
       classValueTotalOccurrence += classValueOccurrence
-      const probability = classValueOccurrence/sampleSetValueOccurrences[sampleSetValue]
-      entropy += - (probability * Math.log2(probability))
+      const frequency = classValueOccurrence/sampleSetValueOccurrences[sampleSetValue]
+      entropy += - (frequency * Math.log2(frequency))
     }
 
-    sampleSetValueProbability[sampleSetValue] = classValueTotalOccurrence/sampleSet.length
+    sampleSetValueFrequency[sampleSetValue] = classValueTotalOccurrence/sampleSet.length
     sampleSetValueEntropy[sampleSetValue] = entropy
   }
 
   let obtainedEntropy = 0
   for (const value in sampleSetValueEntropy) {
-    obtainedEntropy +=  sampleSetValueProbability[value] * sampleSetValueEntropy[value]
+    obtainedEntropy +=  sampleSetValueFrequency[value] * sampleSetValueEntropy[value]
   }
 
   return obtainedEntropy
