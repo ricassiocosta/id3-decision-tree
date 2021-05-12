@@ -7,9 +7,9 @@ function getInformationGain(sampleSet: string[], classValuesSampleSet: string[])
 
   console.log('______________________________')
   console.log('sampleSet:', sampleSet)
-  console.log('total entropy:', totalEntropy)
-  console.log('obtainedEntropy:', obtainedEntropy)
-  console.log('information gain:', informationGain)
+  console.log('total entropy:', totalEntropy.toFixed(3))
+  console.log('obtainedEntropy:', obtainedEntropy.toFixed(3))
+  console.log('information gain:', informationGain.toFixed(3))
   console.log('______________________________')
 
   return informationGain
